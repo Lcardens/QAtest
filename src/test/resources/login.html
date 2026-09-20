@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Login de practica</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 320px; margin: 60px auto; }
+        label { display: block; margin-top: 12px; }
+        input, button { width: 100%; padding: 8px; margin-top: 4px; }
+        button { margin-top: 18px; cursor: pointer; }
+        .aviso { margin-top: 12px; padding: 8px; border-radius: 4px; }
+        .error { background: #ffe0e0; color: #a00; }
+        .ok { background: #e0ffe0; color: #080; }
+    </style>
+</head>
+<body>
+    <h2>Bienvenido</h2>
+    <label for="usuario">Usuario</label>
+    <input type="text" id="usuario" name="usuario">
+
+    <label for="clave">Contraseña</label>
+    <input type="password" id="clave" name="clave">
+
+    <button type="button" id="btnIngresar">Ingresar</button>
+
+    <div id="mensaje" class="aviso error" hidden></div>
+    <div id="bienvenida" class="aviso ok" hidden></div>
+
+    <script>
+        function ingresar() {
+            var u = document.getElementById("usuario").value;
+            var c = document.getElementById("clave").value;
+            var error = document.getElementById("mensaje");
+            var ok = document.getElementById("bienvenida");
+            error.hidden = true;
+            ok.hidden = true;
+            if (u === "admin" && c === "1234") {
+                ok.textContent = "Bienvenido " + u;
+                ok.hidden = false;
+            } else {
+                error.textContent = "Usuario o clave incorrectos";
+                error.hidden = false;
+            }
+        }
+        document.getElementById("btnIngresar").addEventListener("click", ingresar);
+    </script>
+</body>
+</html>
