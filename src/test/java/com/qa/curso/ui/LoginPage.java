@@ -1,38 +1,54 @@
 package com.qa.curso.ui;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class LoginPage { // cada LoginPage es una CAJA que guarda su propio volante (driver)
+public class LoginPage {
+
     private final WebDriver driver;
 
-    // el molde necesita que le pasen el volante al construirlo
     public LoginPage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this);   //  el "repartidor"
     }
+
+    @FindBy(id = "usuario")
+    private WebElement campoUsuario;              // cajita etiquetada
+
+    @FindBy(id = "clave")
+    private WebElement campoClave;
+
+    @FindBy(id = "btnIngresar")
+    private WebElement botonIngresar;
+
+    @FindBy(id = "bienvenida")
+    private WebElement mensajeBienvenida;
+
+    @FindBy(id = "mensaje")
+    private WebElement mensajeError;
 
     public void abrir() {
         driver.get(Paginas.urlLogin());
     }
 
     public void escribirUsuario(String usuario) {
-        driver.findElement(By.id("usuario")).sendKeys(usuario);
+        campoUsuario.sendKeys(usuario);           // uso la cajita
     }
 
     public void escribirClave(String clave) {
-        driver.findElement(By.id("clave")).sendKeys(clave);
+        campoClave.sendKeys(clave);
     }
 
     public void hacerClicEnIngresar() {
-        driver.findElement(By.id("btnIngresar")).click();
+        botonIngresar.click();
     }
 
-    // una accion COMPUESTA: junta varios pasos
     public void iniciarSesion(String usuario, String clave) {
         abrir();
         escribirUsuario(usuario);
@@ -42,16 +58,13 @@ public class LoginPage { // cada LoginPage es una CAJA que guarda su propio vola
 
     public String textoBienvenida() {
         WebDriverWait espera = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement bienvenida = espera.until(
-                ExpectedConditions.visibilityOfElementLocated(By.id("bienvenida")));
-        return bienvenida.getText();
+        espera.until(ExpectedConditions.visibilityOf(mensajeBienvenida));
+        return mensajeBienvenida.getText();
     }
 
     public String textoDeError() {
         WebDriverWait espera = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement mensaje = espera.until(
-                ExpectedConditions.visibilityOfElementLocated(By.id("mensaje")));
-        return mensaje.getText();
+        espera.until(ExpectedConditions.visibilityOf(mensajeError));
+        return mensajeError.getText();
     }
 }
-
