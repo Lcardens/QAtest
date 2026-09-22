@@ -15,13 +15,13 @@ public class LoginPage {
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver, this);   //  el "repartidor"
+        PageFactory.initElements(driver, this);
     }
 
-    @FindBy(id = "usuario")
-    private WebElement campoUsuario;              // cajita etiquetada
+    @FindBy(name = "usuario")
+    private WebElement campoUsuario;
 
-    @FindBy(id = "clave")
+    @FindBy(css = "input[type='password']")
     private WebElement campoClave;
 
     @FindBy(id = "btnIngresar")
