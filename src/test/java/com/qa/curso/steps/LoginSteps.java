@@ -1,5 +1,5 @@
 package com.qa.curso.steps;
-
+import io.cucumber.java.After;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.qa.curso.driver.WebDriverFactory;
@@ -36,6 +36,12 @@ public class LoginSteps {
                 ? login.textoBienvenida()
                 : login.textoDeError();
         assertThat(texto).isEqualTo(esperado);
-        driver.quit();
+    }
+
+    @After
+    public void cerrarNavegador() {
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }
