@@ -8,6 +8,22 @@ on:
 jobs:
   pruebas:
     runs-on: ubuntu-latest
+    on:
+      push:
+        branches: [ main ]
+      workflow_dispatch:
+
+    jobs:
+      pruebas:
+        runs-on: ubuntu-latest
+        env:
+          USUARIO_ADMIN: ${{ secrets.USUARIO_ADMIN }}
+          CLAVE_ADMIN: ${{ secrets.CLAVE_ADMIN }}
+
+        steps:
+          - name: Descargar el codigo
+            uses: actions/checkout@v4
+
 
     steps:
       - name: Descargar el codigo
