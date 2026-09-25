@@ -13,3 +13,10 @@ Feature: Login en la API publica Reqres
     When method Post
     Then status 400
     And match response.error == 'Missing password'
+
+  Scenario: Crear un usuario
+    Given url 'https://reqres.in/api/users'
+    And request { name: 'Luisa', job: 'QA'}
+    When method Post
+    Then status 201
+    And match response.id == '#notnull'
