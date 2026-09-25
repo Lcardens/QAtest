@@ -1,6 +1,5 @@
 Feature: Practice login
 
-  @smoke
   Scenario: Successful login
     Given the login page is open
     When I enter the user "admin" and the password "1234"
