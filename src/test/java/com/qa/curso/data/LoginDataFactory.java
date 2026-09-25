@@ -11,6 +11,7 @@ public class LoginDataFactory {
                 Arguments.of("admin", "", "Usuario o clave incorrectos"),
                 Arguments.of("", "1234", "Usuario o clave incorrectos"),
                 Arguments.of("", "", "Usuario o clave incorrectos"),
+                Arguments.of("Luisa", "5656", "Usuario o clave incorrectos"),
                 Arguments.of("pepe", "1234", "Usuario o clave incorrectos")
         );
     }
