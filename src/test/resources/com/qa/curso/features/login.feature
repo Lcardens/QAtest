@@ -16,3 +16,12 @@ Feature: Practice login
       | admin   | 9999  | Usuario o clave incorrectos |
       | admin   | wrong | Usuario o clave incorrectos |
       |         | 1234  | Usuario o clave incorrectos |
+
+
+@manual
+@manual-result:passed
+@manual-last-tested:1.0
+  Scenario: Recuperacion de contraseña (verificado manualmente)
+    Given the login page is open
+    When I enter the user "admin" and the password "1234"
+    Then I see the message "Bienvenido admin"
